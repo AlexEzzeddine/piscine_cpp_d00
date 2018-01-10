@@ -40,19 +40,17 @@ int	Account::getNbWithdrawals( void )
 	return _totalNbWithdrawals;
 }
 
-void	Account::_displayTimestamp( void ) {
-	std::time_t t = std::time(0);
-	struct tm * now = localtime( & t );
-	std::cout << '[' << (now->tm_year + 1900)
-	<< std::setw(2) << std::setfill('0') << (now->tm_mon + 1)
-	<< std::setw(2) << std::setfill('0') << now->tm_mday
-	<< '_'
-	<< std::setw(2) << std::setfill('0') << now->tm_hour
-	<< std::setw(2) << std::setfill('0') << now->tm_min
-	<< std::setw(2) << std::setfill('0') << now->tm_sec << "] ";
+void	Account::_displayTimestamp(void)
+{
+	time_t        now = time(0);
+    struct tm    *tnow = localtime(&now);
+    char        t[32];
+
+    strftime(t, sizeof(t), "[%Y%d%m_%H%M%S] ", tnow);
+    std::cout << t;
 }
 
-void	Account::displayAccountsInfos( void )
+void	Account::displayAccountsInfos(void)
 {
 	// [20150406_153629] accounts:8;total:20049;deposits:0;withdrawals:0
 	_displayTimestamp();
